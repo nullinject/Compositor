@@ -102,6 +102,7 @@ nonisolated enum LevelsFilter {
 }
 
 @Observable
+@MainActor
 final class LevelsEdit {
     let layerID: UUID
     let original: ImportedImage

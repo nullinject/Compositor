@@ -1,0 +1,30 @@
+{
+  "changed_pixel_count_tolerance_2" : 124,
+  "height" : 128,
+  "original_center_rgba" : [
+    128,
+    128,
+    80,
+    255
+  ],
+  "outside_exported_rgba" : [
+    20,
+    20,
+    80,
+    255
+  ],
+  "outside_original_rgba" : [
+    20,
+    20,
+    80,
+    255
+  ],
+  "painted_center_rgba" : [
+    0,
+    0,
+    0,
+    255
+  ],
+  "passed" : true,
+  "width" : 128
+}

@@ -1,0 +1,38 @@
+Compositor 1.4.5 macOS 15 ARM64 local validation
+
+Host: macOS 15.6 (24G84), arm64, 8 GB MacBook Air M1.
+Toolchain: installed Command Line Tools 16.4, Swift 6.1.2, SDK 15.5.
+C compilation: nine sources, clang -O3.
+Swift compilation: 142 sources, -O, whole-module optimization, one backend thread.
+Final Swift diagnostics: zero errors and zero warnings (empty compiler diagnostic log).
+Packaging: arm64 only, Mach-O minimum OS 15.6, SDK 15.5.
+Bundle identifier: com.wonderassembly.compositor.macos15.
+Signature: ad hoc with hardened runtime; codesign --verify --deep --strict passed.
+Entitlements: app-sandbox, files.user-selected.read-write, network.client retained.
+Updater: Sparkle absent from linked libraries; SUFeedURL absent from Info.plist.
+DMG checksum verification, read-only mounting, and mounted app signature checks passed.
+
+GUI smoke test from the app inside the mounted DMG:
+- App launched and presented the new-canvas UI, toolbar and layer panel.
+- Imported a generated 128x128 PNG gradient into a new image document.
+- Painted a 12-pixel black brush dab at the image center.
+- Undo visibly removed the dab; redo restored it.
+- Saved Smoke-painted.comp (project format version 11), closed the project, reopened it.
+- The reopened project showed its image layer and painted dab.
+- Exported the reopened project as PNG through the native save panel.
+- Decoded original and exported PNG with ImageIO and normalized them to sRGB RGBA.
+- Export remained 128x128, center RGBA [0,0,0,255].
+- Original center RGBA [128,128,80,255].
+- At (10,10), original and exported RGBA both [20,20,80,255].
+- 124 pixels changed using a per-channel tolerance of 2; localized small brush area.
+- App quit normally after the saved-project test; no crash or import/export alert occurred.
+
+Limitations:
+- Full Xcode is unavailable, so the Xcode unit-test target was not run.
+- This is a small PNG editing smoke test, not a complete regression or performance benchmark.
+- Large projects, layered PSD/RAW imports, Vision selection, advanced filters and all tool modes
+  were not independently exercised during this check.
+- Ad-hoc signed, not Developer ID signed or notarized. No Gatekeeper settings were changed.
+- No app was installed in /Applications and no user files were removed.
+
+Validated (UTC): 2026-10-07T23:05:45.621140+00:00

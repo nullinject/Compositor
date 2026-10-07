@@ -271,6 +271,7 @@ nonisolated enum PixelFilter {
 }
 
 @Observable
+@MainActor
 final class FilterEdit {
     let kind: FilterKind
     let layerID: UUID

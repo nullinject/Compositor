@@ -37,6 +37,7 @@ import QuartzCore
 
     /// A stroke in progress as one texture: the layer's old pixels (or old mask) with the stroke's tiles written in as
     /// they change, so a frame uploads only the tiles the last few dabs touched.
+    @MainActor
     private final class StrokeTexture {
         let texture: MTLTexture
         let image: CIImage
@@ -168,6 +169,7 @@ import QuartzCore
     /// place by the GPU, in order with everything else it does to that texture. Written straight into the texture's
     /// memory instead, a tile isn't seen on every GPU — a virtual machine's keeps its own copy, and parts of the texture
     /// came out empty.
+    @MainActor
     private final class TileWrites {
         let renderer: GPUCanvasRenderer
         let texture: MTLTexture

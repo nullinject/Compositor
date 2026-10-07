@@ -1,6 +1,7 @@
 # Build output
 dist/
 build/
+build-clt/
 DerivedData/
 *.xcarchive
 *.dmg
@@ -22,3 +23,10 @@ xcuserdata/
 # Claude Code settings personal to this machine
 .claude/settings.local.json
 BUILD_PLAN.md
+
+# Local validation fixtures and delivery scratch
+smoke-test/
+ai-demo/
+.publish-checkout/
+__pycache__/
+*.pyc

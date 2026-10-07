@@ -372,7 +372,7 @@ nonisolated enum TiledLayerRenderer {
 /// used are dropped beyond a pixel budget.
 nonisolated final class TiledPieceCache: @unchecked Sendable {
     static let shared = TiledPieceCache()
-    static let pixelBudget = 150_000_000
+    static let pixelBudget = DocumentLimits.rasterCachePixelBudget(maximum: 150_000_000)
     private struct Key: Hashable {
         let raster: ObjectIdentifier
         let level: Int

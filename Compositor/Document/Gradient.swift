@@ -20,6 +20,7 @@ nonisolated struct GradientSettings: Equatable, Sendable {
 
 /// An uncommitted gradient on one layer or mask. Endpoints are document pixels;
 /// the raster preview lives in `raster` and never touches the document until commit.
+@MainActor
 final class GradientEdit {
     let raster: BrushStroke
     var start: CGPoint

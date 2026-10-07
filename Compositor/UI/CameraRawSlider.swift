@@ -110,6 +110,7 @@ struct CameraRawSlider: NSViewRepresentable {
         }
     }
 
+    @MainActor
     final class Coordinator: NSObject {
         var onChange: (Double) -> Void
         var onReset: () -> Void

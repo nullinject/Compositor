@@ -12,8 +12,8 @@ import Foundation
 /// piece of an image reduced on its own lines up with the whole image reduced (see `TiledLayerRenderer`).
 nonisolated final class DownsampleCache: @unchecked Sendable {
     static let shared = DownsampleCache()
-    /// Pixels of halved copies kept at once (about 400 MB of RGBA).
-    static let pixelBudget = DocumentLimits.maxSurfacePixels
+    /// Pixels of halved copies kept at once, scaled down on Macs with less memory.
+    static let pixelBudget = DocumentLimits.rasterCachePixelBudget(maximum: DocumentLimits.maxSurfacePixels)
     /// Most halvings ever used; past this Core Graphics does the rest.
     static let maxLevel = 6
 

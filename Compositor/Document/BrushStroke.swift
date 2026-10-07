@@ -118,6 +118,7 @@ nonisolated enum BrushRaster {
 
 /// Only touched 256px tiles allocate writable pixels. Snapshots copy at most
 /// those tiles, never the entire layer on a mouse-move event.
+@MainActor
 final class BrushStroke {
     let layer: ImageLayer
     let isMask: Bool

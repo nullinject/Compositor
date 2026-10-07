@@ -11,6 +11,7 @@ private extension Array {
 }
 
 /// Selected pixels being dragged: the lifted raster plus the outline it started from.
+@MainActor
 final class PixelMove {
     let raster: BrushStroke
     let origin: DocumentSelection

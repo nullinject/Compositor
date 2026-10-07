@@ -36,6 +36,12 @@ nonisolated enum DocumentLimits {
     static let documentPixelBudget = min(800_000_000,
         max(maxSurfacePixels, Int(clamping: ProcessInfo.processInfo.physicalMemory / 16)))
 
+    /// Disposable CPU render caches each retain at most 1/32 of physical RAM at RGBA8: 256 MiB on an
+    /// 8 GiB Mac. These are soft cache budgets, not a limit on the document or temporary filter allocations.
+    static func rasterCachePixelBudget(maximum: Int, physicalMemory: UInt64 = ProcessInfo.processInfo.physicalMemory) -> Int {
+        min(maximum, max(1, Int(clamping: physicalMemory / 128)))
+    }
+
     /// The two ceilings as megapixels, for the messages that quote them back to the reader.
     static var maxSurfaceMegapixels: Int { maxSurfacePixels / 1_000_000 }
     static var documentBudgetMegapixels: Int { documentPixelBudget / 1_000_000 }

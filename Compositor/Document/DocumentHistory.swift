@@ -4,6 +4,7 @@ import Observation
 
 /// Value snapshots share immutable CGImages; no pixel copies for layer edits.
 @Observable
+@MainActor
 final class DocumentHistory {
     struct Snapshot {
         let document: CanvasDocument?

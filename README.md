@@ -1,5 +1,15 @@
 # Compositor
 
+> **macOS 15 compatibility branch:** tested on macOS 15.6 ARM64 with an M1
+> MacBook Air (8 GB), using CLT 16.4 / Swift 6.1.2 and SDK 15.5. App launch,
+> PNG import, painting, undo/redo, project save/reopen and PNG export pixel checks
+> passed. The local app is ad-hoc signed and not notarized; the Xcode unit-test
+> target was not run because full Xcode was unavailable. This is a custom fork,
+> not an upstream release or a promise of ongoing maintenance. See the
+> [compatibility guide](docs/macos15-compatibility.md) and
+> [exact validation scope](docs/runtime-validation.txt).
+> The upstream main branch and downloads still require macOS 26.0 or later.
+
 Adobe Photoshop costs too much and tools like GIMP don’t feel familiar enough for me to stay in flow. That’s why I built Compositor.
 
 The goal was to create a full-featured image editor that is completely free and open source. I used to use Photoshop for compositing and post-processing, so Compositor is built around that workflow - with the tools needed to create a pixel-perfect final image.
@@ -72,21 +82,31 @@ brew install --cask robbietilton-compositor
 - Keep working while a project saves
 - Photoshop-style keyboard shortcuts throughout, remappable in Edit > Keyboard Shortcuts
 - Drag a number's label to scrub its value, as in Photoshop
-- Automatic updates, signed and notarized
+- Manual updates in this compatibility build; local packaging uses ad-hoc signing, without notarization
 
 ### Works with AI agents
 - AI agents and scripts can build and edit projects directly: a `.comp` is a folder of PNG layers and a manifest, and an open project updates live as it's written. See [Writing Compositor projects](docs/writing-comp-files.md)
 
 ## Requirements
 
-- macOS 26.0 or later on a Mac with Apple silicon
-- Xcode 26 or later (to build from source)
+- Compatibility branch: macOS 15.6 or later, ARM64; tested on an M1 MacBook Air.
+- Direct build: installed CLT 16.4 / Swift 6.1.2 and macOS SDK 15.5, plus Python 3.
+- macOS 14.x and Intel compatibility have not been established.
+- Upstream main branch: macOS 26.0 or later.
 
 ## Building
 
-Open `Compositor.xcodeproj` and run the **Compositor** scheme.
+For the tested CLT route, run `bash scripts/build-macos15-dmg.sh`. The script
+uses the installed SDK 15.5 explicitly and does not install tools or alter security
+settings. See the compatibility guide for outputs and limitations. Full Xcode
+can also open `Compositor.xcodeproj` and run the **Compositor** scheme.
+
+CI workflows on this compatibility branch are manual (`workflow_dispatch`) only.
+Publishing the branch does not start a macOS build or consume runner time.
 
 ## Releasing
+
+For this custom build use `scripts/build-macos15-dmg.sh`; see the [compatibility guide](docs/macos15-compatibility.md). The original upstream release process below requires the original signing setup and is not needed for a local build.
 
 `scripts/release.sh` builds a Release version, signs it with Developer ID, notarizes and staples it, and packages it into `dist/Compositor-<version>.dmg`.
 

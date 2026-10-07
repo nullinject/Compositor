@@ -395,6 +395,7 @@ nonisolated enum HueSaturationFilter {
 /// and are drawn straight on the canvas, so dragging stays responsive and the document is
 /// untouched until OK.
 @Observable
+@MainActor
 final class HueSaturationEdit {
     let layerID: UUID
     let original: ImportedImage
